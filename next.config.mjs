@@ -9,7 +9,11 @@ const nextConfig = {
   },
 
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api', // Updated fallback
+  },
+
+  experimental: {
+    buildTrace: false, // Add this to disable build traces
   },
 
   webpack: (config, { dev, isServer }) => {
@@ -46,7 +50,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}/api/:path*`,
       },
     ];
   },
