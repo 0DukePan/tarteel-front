@@ -154,7 +154,7 @@ export function HeroSection() {
             <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform hover:rotate-0 rotate-2 transition-transform duration-500 hover:shadow-3xl">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-3xl"></div>
               <img
-                src="/tarteel.png"
+                src="/tarteel.webp"
                 alt="Children learning Quran"
                 className="w-full h-80 object-cover rounded-2xl relative z-10"
               />
