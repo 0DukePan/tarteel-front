@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    // Enable webpack build worker to potentially help with build performance
     webpackBuildWorker: false,
   },
   eslint: {
@@ -13,30 +12,54 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Add output configuration if you're deploying to Vercel
   output: 'standalone',
-  // Optimize build traces
-  outputFileTracing: false,
-  // Add webpack configuration to handle potential circular dependencies
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api',
+  },
   webpack: (config, { isServer }) => {
-    // Ignore specific modules that might cause issues
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
       net: false,
       tls: false,
     };
-    
-    // Add rule to handle potential problematic imports
     config.module.rules.push({
       test: /\.m?js$/,
       resolve: {
         fullySpecified: false,
       },
     });
-
     return config;
   },
-}
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
+        ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/admin/dashboard',
+        destination: '/admin',
+        permanent: true,
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}/api/:path*`,
+      },
+    ];
+  },
+};
 
-export default nextConfig
+export default nextConfig;
