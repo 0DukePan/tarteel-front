@@ -3,10 +3,13 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   darkMode: 'class',
   content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './pages/**/*.{ts,tsx}',
-  ],
+    './app/**/*.{ts,tsx,js,jsx,mdx,css}',
+    './components/**/*.{ts,tsx,js,jsx,mdx}',
+    './pages/**/*.{ts,tsx,js,jsx,mdx}',
+    './lib/**/*.{ts,tsx}', // optional if you use Tailwind in `lib`
+    './**/*.css',          // 👈 REQUIRED for Tailwind classes in CSS files
+  ]
+,  
   theme: {
     extend: {
       colors: {
