@@ -42,14 +42,13 @@ const nextConfig = {
     ];
   },
 
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}/api/:path*`,
-      },
-    ];
-  },
+  rewrites: async () => [
+    {
+      source: '/api/:path*',
+      destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com'}/:path*`,
+    },
+  ],
+  
 
   eslint: {
     ignoreDuringBuilds: true,
