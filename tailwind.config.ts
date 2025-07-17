@@ -1,11 +1,11 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  darkMode: ["class", "dark"], // Fixed earlier TypeScript error
+  darkMode: ["class", "dark"],
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}", // Focus on app directory (Next.js 13+ app router)
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}", // Include pages if using pages router
+    "./components/**/*.{js,ts,jsx,tsx,mdx}", // Include components
   ],
   theme: {
     extend: {
