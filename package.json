@@ -22,6 +22,7 @@
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.292.0",
     "next": "14.0.0",
+    "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
