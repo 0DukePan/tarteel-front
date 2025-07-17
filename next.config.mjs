@@ -16,6 +16,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api',
   },
+  outputFileTracing: false, // Re-enable to skip trace collection
   webpack: (config, { isServer }) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
