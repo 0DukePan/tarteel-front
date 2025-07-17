@@ -1,15 +1,13 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss"
 
 const config: Config = {
-  darkMode: 'class',
+  darkMode: "class",
   content: [
-    './app/**/*.{ts,tsx,js,jsx,mdx,css}',
-    './components/**/*.{ts,tsx,js,jsx,mdx}',
-    './pages/**/*.{ts,tsx,js,jsx,mdx}',
-    './lib/**/*.{ts,tsx}', // optional if you use Tailwind in `lib`
-    './**/*.css',          // 👈 REQUIRED for Tailwind classes in CSS files
-  ]
-,  
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/admin/**/*.{js,ts,jsx,tsx,mdx}",
+    "*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
