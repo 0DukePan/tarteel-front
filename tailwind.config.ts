@@ -3,9 +3,9 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   darkMode: ["class", "dark"],
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}", // Focus on app directory (Next.js 13+ app router)
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}", // Include pages if using pages router
+    "./app/**/*.{js,ts,jsx,tsx,mdx}", // Primary focus on App Router
     "./components/**/*.{js,ts,jsx,tsx,mdx}", // Include components
+    // Remove "./pages/**/*.{js,ts,jsx,tsx,mdx}" unless you’re using Pages Router
   ],
   theme: {
     extend: {
