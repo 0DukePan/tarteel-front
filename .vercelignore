@@ -1,0 +1,11 @@
+# Vercel ignore file to prevent problematic files from being uploaded
+node_modules
+.next
+.git
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.DS_Store
+Thumbs.db
