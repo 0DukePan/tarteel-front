@@ -67,7 +67,7 @@ export function AdminLogin() {
   }
 
   return (
-    <Card className="w-full max-w-lg shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+    <Card className="w-full max-w-2xl shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
       <CardHeader className="text-center pb-8">
         <div className="flex justify-center mb-6">
           <div className="p-4 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-2xl shadow-lg">
