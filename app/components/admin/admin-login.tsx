@@ -34,11 +34,9 @@ export function AdminLogin() {
   })
 
   const pathname = usePathname()
-  // Handle redirect only once when admin becomes available
+
   useEffect(() => {
-    console.log("AdminLogin useEffect:", { admin, loading, pathname, isRedirecting })
     if (admin && !loading && pathname === "/admin/login" && !isRedirecting) {
-      console.log("AdminLogin: Already logged in, redirecting to /admin")
       setIsRedirecting(true)
       router.push("/admin")
     }
@@ -46,111 +44,108 @@ export function AdminLogin() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      console.log("Attempting login with:", data.email)
       await login(data.email, data.password)
-      console.log("Login successful")
-      // Don't manually redirect here - let the useEffect handle it
     } catch (err) {
       console.error("Login failed:", err)
-      // Error is handled by the store
     }
   }
 
-  // Show loading state if redirecting
   if (isRedirecting) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <LoadingSpinner size="lg" />
-        <p className="text-gray-600">Redirecting to dashboard...</p>
+        <p className="text-gray-600 mt-4">Redirecting to dashboard...</p>
       </div>
     )
   }
 
   return (
-    <Card className="w-full max-w-2xl shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
-      <CardHeader className="text-center pb-8">
-        <div className="flex justify-center mb-6">
-          <div className="p-4 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-2xl shadow-lg">
-            <BookOpen className="w-12 h-12 text-emerald-600" />
-          </div>
-        </div>
-        <CardTitle className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</CardTitle>
-        <p className="text-gray-600 text-lg">Sign in to your admin account</p>
-      </CardHeader>
-
-      <CardContent className="space-y-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {error && (
-            <Alert variant="destructive" className="rounded-xl border-red-200 bg-red-50">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="text-red-800">{error}</AlertDescription>
-            </Alert>
-          )}
-
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
-              Email Address
-            </Label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                id="email"
-                type="email"
-                {...register("email")}
-                className={`pl-10 rounded-xl border-2 transition-all duration-200 ${
-                  errors.email ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-emerald-500"
-                }`}
-                placeholder="admin@quranschool.com"
-              />
+    <div className="flex items-center justify-center min-h-screen px-4">
+      <Card className="w-full max-w-4xl shadow-2xl border-0 bg-white/95 backdrop-blur-sm">
+        <CardHeader className="text-center pb-8">
+          <div className="flex justify-center mb-6">
+            <div className="p-4 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-2xl shadow-lg">
+              <BookOpen className="w-12 h-12 text-emerald-600" />
             </div>
-            {errors.email && (
-              <p className="text-sm text-red-600 flex items-center mt-1">
-                <AlertCircle className="w-4 h-4 mr-1" />
-                {errors.email.message}
-              </p>
-            )}
           </div>
+          <CardTitle className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</CardTitle>
+          <p className="text-gray-600 text-lg">Sign in to your admin account</p>
+        </CardHeader>
 
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-semibold text-gray-700">
-              Password
-            </Label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <Input
-                id="password"
-                type="password"
-                {...register("password")}
-                className={`pl-10 rounded-xl border-2 transition-all duration-200 ${
-                  errors.password ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-emerald-500"
-                }`}
-                placeholder="Enter your password"
-              />
+        <CardContent className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {error && (
+              <Alert variant="destructive" className="rounded-xl border-red-200 bg-red-50">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription className="text-red-800">{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-semibold text-gray-700">
+                Email Address
+              </Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  className={`pl-10 rounded-xl border-2 transition-all duration-200 ${
+                    errors.email ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-emerald-500"
+                  }`}
+                  placeholder="admin@quranschool.com"
+                />
+              </div>
+              {errors.email && (
+                <p className="text-sm text-red-600 flex items-center mt-1">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.email.message}
+                </p>
+              )}
             </div>
-            {errors.password && (
-              <p className="text-sm text-red-600 flex items-center mt-1">
-                <AlertCircle className="w-4 h-4 mr-1" />
-                {errors.password.message}
-              </p>
-            )}
-          </div>
 
-          <Button
-            type="submit"
-            className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <LoadingSpinner size="sm" className="mr-2" />
-                Signing in...
-              </>
-            ) : (
-              "Sign In to Admin Panel"
-            )}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-semibold text-gray-700">
+                Password
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password")}
+                  className={`pl-10 rounded-xl border-2 transition-all duration-200 ${
+                    errors.password ? "border-red-300 focus:border-red-500" : "border-gray-200 focus:border-emerald-500"
+                  }`}
+                  placeholder="Enter your password"
+                />
+              </div>
+              {errors.password && (
+                <p className="text-sm text-red-600 flex items-center mt-1">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <LoadingSpinner size="sm" className="mr-2" />
+                  Signing in...
+                </>
+              ) : (
+                "Sign In to Admin Panel"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
