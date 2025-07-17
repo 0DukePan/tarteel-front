@@ -9,11 +9,7 @@ const nextConfig = {
   },
 
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api', // Updated fallback
-  },
-
-  experimental: {
-    buildTrace: false, // Add this to disable build traces
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api',
   },
 
   webpack: (config, { dev, isServer }) => {

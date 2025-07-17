@@ -3,9 +3,10 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   darkMode: ["class", "dark"],
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}", // Primary focus on App Router
-    "./components/**/*.{js,ts,jsx,tsx,mdx}", // Include components
-    // Remove "./pages/**/*.{js,ts,jsx,tsx,mdx}" unless you’re using Pages Router
+    "./app/page.{js,ts,jsx,tsx,mdx}", // Only main entry point
+    "./components/**/*.{js,ts,jsx,tsx,mdx}", // Limit to components
+    "!**/node_modules/**", // Explicitly ignore node_modules
+    "!**/.next/**",       // Ignore build output
   ],
   theme: {
     extend: {
