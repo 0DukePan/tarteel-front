@@ -2,7 +2,7 @@
 "use client";
 
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
-import { getAuthToken, setAuthToken } from '@/lib/auth';
+import { getAuthToken, setAuthToken } from '../lib/auth';
 import type {
   AdminUser,
   ClassFormData,
@@ -18,7 +18,8 @@ import type {
   ApiResponse,
 } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://tarteel-back.onrender.com/api'
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://tarteel-back.onrender.com/api'
+const API_BASE_URL = 'http://localhost:5000/api';
 console.log(API_BASE_URL);
 
 class ApiClient {

@@ -1,37 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    webpackBuildWorker: false,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  reactStrictMode: true,
+  swcMinify: true,
+
   images: {
+    domains: ['localhost'],
+    formats: ['image/webp', 'image/avif'],
     unoptimized: true,
   },
-  output: 'standalone',
+
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-  outputFileTracing: false, // Re-enable to skip trace collection
-  webpack: (config, { isServer }) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
-    config.module.rules.push({
-      test: /\.m?js$/,
-      resolve: {
-        fullySpecified: false,
-      },
-    });
+
+  experimental: {
+    appDir: true,
+  },
+
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      config.optimization.splitChunks.chunks = 'all';
+    }
     return config;
   },
+
   async headers() {
     return [
       {
@@ -44,6 +36,7 @@ const nextConfig = {
       },
     ];
   },
+
   async redirects() {
     return [
       {
@@ -53,14 +46,23 @@ const nextConfig = {
       },
     ];
   },
+
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}/api/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/:path*`,
       },
     ];
   },
+
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
+// ✅ ESM export
 export default nextConfig;

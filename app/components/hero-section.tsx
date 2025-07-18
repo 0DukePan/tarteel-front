@@ -150,11 +150,15 @@ export function HeroSection() {
           <div className="relative mt-6 sm:mt-0">
             <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-8 transform hover:rotate-0 rotate-2 transition-transform duration-500 hover:shadow-3xl">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-2xl sm:rounded-3xl"></div>
-              <img
-                src="/tarteel.webp"
-                alt="Children learning Quran"
-                className="w-full h-48 sm:h-64 lg:h-80 object-cover rounded-xl sm:rounded-2xl relative z-10"
-              />
+              <div className="h-64 sm:h-80 lg:h-[22rem] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl relative z-10">
+                <img
+                  src="/tarteel.webp"
+                  alt="Children learning Quran"
+                  className="w-auto h-full object-contain"
+                />
+              </div>
+
+
               <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl z-20">
                 <div className="text-lg sm:text-2xl font-bold">100%</div>
                 <div className="text-xs sm:text-sm opacity-90">Islamic Environment</div>

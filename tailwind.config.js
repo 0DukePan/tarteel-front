@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{ts,tsx}',        // App Router files
-    './components/**/*.{ts,tsx}', // Components
-    './pages/**/*.{ts,tsx}',     // Pages Router (if used)
-    './layout/**/*.{ts,tsx}',    // Layouts
-    './globals.css',             // Explicitly include globals.css
+    './app/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './lib/**/*.{ts,tsx}',
+    './pages/**/*.{ts,tsx}',  // If you're using Pages Router anywhere
+    './layout/**/*.{ts,tsx}', // Optional if you have layouts outside /app
+    './app/globals.css',
   ],
   theme: {
     extend: {
@@ -31,12 +32,13 @@ module.exports = {
         ring: 'hsl(var(--ring))',
       },
       borderRadius: {
-        DEFAULT: 'var(--radius)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
     },
   },
-  plugins: [],
-};
+  plugins: [
+    require('tailwindcss-animate'), // make sure it's installed via `npm i tailwindcss-animate`
+  ],
+}
