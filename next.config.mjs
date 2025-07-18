@@ -2,28 +2,24 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-
   images: {
     domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
     unoptimized: true,
   },
-
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-
+  // Remove the deprecated appDir option
   experimental: {
-    appDir: true,
+    // appDir: true, // This is deprecated in Next.js 14
   },
-
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.optimization.splitChunks.chunks = 'all';
     }
     return config;
   },
-
   async headers() {
     return [
       {
@@ -36,7 +32,6 @@ const nextConfig = {
       },
     ];
   },
-
   async redirects() {
     return [
       {
@@ -46,7 +41,6 @@ const nextConfig = {
       },
     ];
   },
-
   async rewrites() {
     return [
       {
@@ -55,14 +49,18 @@ const nextConfig = {
       },
     ];
   },
-
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Add output configuration to help with build traces
+  output: 'standalone',
+  // Disable build trace collection if it's causing issues
+  experimental: {
+    outputFileTracingRoot: undefined,
+  },
 };
 
-// ✅ ESM export
 export default nextConfig;

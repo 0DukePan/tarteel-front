@@ -1,12 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './lib/**/*.{ts,tsx}',
-    './pages/**/*.{ts,tsx}',  // If you're using Pages Router anywhere
-    './layout/**/*.{ts,tsx}', // Optional if you have layouts outside /app
-    './app/globals.css',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './layout/**/*.{js,ts,jsx,tsx,mdx}',
+    // Remove the CSS file from content array - it's not needed
+    // './app/globals.css',
   ],
   theme: {
     extend: {
@@ -39,6 +40,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'), // make sure it's installed via `npm i tailwindcss-animate`
+    require('tailwindcss-animate'),
   ],
-}
+};
