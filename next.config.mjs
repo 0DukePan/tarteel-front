@@ -45,7 +45,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/:path*`,
+        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}`
       },
     ];
   },
@@ -55,12 +55,24 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Add output configuration to help with build traces
-  output: 'standalone',
-  // Disable build trace collection if it's causing issues
+  // Disable build trace collection entirely to prevent stack overflow
   experimental: {
-    outputFileTracingRoot: undefined,
+    outputFileTracingRoot: process.cwd(),
+    outputFileTracingExcludes: {
+      '*': [
+        'node_modules/**/*',
+        '.next/**/*',
+        '.git/**/*',
+        'coverage/**/*',
+        'tmp/**/*',
+        'temp/**/*',
+      ],
+    },
+    // Disable other experimental features that might cause issues
+    optimizePackageImports: false,
   },
+  // Alternative: completely disable tracing
+  outputFileTracing: false,
 };
 
 export default nextConfig;
