@@ -31,15 +31,18 @@ export const useRegistrationStore = create<RegistrationState>((set, get) => ({
       const response = await apiClient.createRegistration(data);
       set({ loading: false });
       return response;
-    } catch (error) {
+    } catch (error: any) {
+      const message =
+        error?.response?.data?.message ||
+        (error instanceof Error ? error.message : "Failed to create registration");
       set({
-        error: error instanceof Error ? error.message : "Failed to create registration",
+        error: message,
         loading: false,
       });
-      throw error;
+      throw new Error(message); 
     }
   },
-
+  
   fetchRegistrations: async (params = {}) => {
     set({ loading: true, error: null });
     try {

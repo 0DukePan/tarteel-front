@@ -18,7 +18,7 @@ import type {
   ApiResponse,
 } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'
 
 console.log(API_BASE_URL);
 
