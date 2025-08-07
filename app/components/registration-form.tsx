@@ -39,6 +39,7 @@ type RegistrationFormData = z.infer<typeof registrationSchema>;
 
 interface RegistrationFormProps {
   onSuccess: (data: { studentId: string; parentId: string }) => void;
+  reportError?: (message: string) => void;
 }
 
 export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
@@ -101,7 +102,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
   const onSubmit = async (data: RegistrationFormData) => {
     try {
-      // Ensure optional fields are undefined if empty
       const cleanedData: RegistrationFormData = {
         parent: {
           ...data.parent,
@@ -112,13 +112,21 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
         },
         student: data.student,
       };
+  
       const result = await submitRegistration(cleanedData);
       onSuccess(result);
-    } catch (error) {
-      // Error is handled by the store
+    } catch (error: any) {
+      const apiMessage = error?.response?.data?.message;
+  
+      if (apiMessage?.toLowerCase().includes("already registered")) {
+        reportError?.("This child is already registered by you.");
+      } else {
+        reportError?.("Something went wrong during registration. Please try again.");
+      }
     }
   };
-
+  
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       {error && (
