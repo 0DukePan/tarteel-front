@@ -48,7 +48,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const lastCheck = get().lastCheckAuthTime;
     const debounceTime = 5000;
     if (lastCheck && now - lastCheck < debounceTime) {
-      console.log("checkAuth debounced: Skipping due to recent call");
+      ("checkAuth debounced: Skipping due to recent call");
       return;
     }
 

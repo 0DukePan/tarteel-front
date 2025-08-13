@@ -23,14 +23,12 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
   useEffect(() => {
     const initAuth = async () => {
-      console.log("AdminLayout: Initializing auth check");
       try {
         await checkAuth();
       } catch (error) {
         console.error("AdminLayout: Auth check failed", error);
       }
       setIsInitialized(true);
-      console.log("AdminLayout: Auth check completed");
     };
 
     if (!isInitialized) {
@@ -39,9 +37,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }, [isInitialized]);
 
   useEffect(() => {
-    console.log("AdminLayout redirect useEffect:", { isInitialized, loading, admin, pathname });
     if (isInitialized && !loading && !admin && pathname !== "/admin/login") {
-      console.log("AdminLayout: No admin, redirecting to login");
       router.push("/admin/login");
     }
   }, [admin, loading, pathname, router, isInitialized]);

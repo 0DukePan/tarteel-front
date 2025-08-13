@@ -65,13 +65,9 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
 
   // Log state for debugging
   useEffect(() => {
-    console.log("studentAge:", studentAge);
-    console.log("classes:", classes);
     console.log("availableClasses:", classes.filter(
       (cls) => studentAge && studentAge >= cls.ageMin && studentAge <= cls.ageMax && !cls.isFull
     ));
-    console.log("selectedClassId:", selectedClassId);
-    console.log("loading:", loading);
   }, [studentAge, classes, selectedClassId, loading]);
 
   useEffect(() => {
@@ -288,7 +284,6 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
               <Label htmlFor="classId">Select Class *</Label>
               <Select
                 onValueChange={(value) => {
-                  console.log("Selected classId:", value);
                   setValue("student.classId", value);
                 }}
                 disabled={!studentAge || availableClasses.length === 0}

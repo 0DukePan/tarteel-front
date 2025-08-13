@@ -16,15 +16,15 @@ export function setAuthToken(token: string | null): void {
       sameSite: 'strict', // Prevent CSRF
       path: '/',
     });
-    console.log('setAuthToken: Token set in cookie');
+    ('setAuthToken: Token set in cookie');
   } else {
     Cookies.remove('auth_token', { path: '/' });
-    console.log('setAuthToken: Token removed from cookie');
+    ('setAuthToken: Token removed from cookie');
   }
 }
 
 export function removeAuthToken(): void {
   if (typeof window === 'undefined') return;
   Cookies.remove('auth_token', { path: '/' });
-  console.log('removeAuthToken: Token removed from cookie');
+  ('removeAuthToken: Token removed from cookie');
 }

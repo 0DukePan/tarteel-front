@@ -24,11 +24,11 @@ export function AdminDashboard() {
     fetchRegistrations({ page: 1, limit: 100 });
     fetchClasses();
     fetchTeachers();
-    console.log("Loading states:", { registrationsLoading, classesLoading, teachersLoading });
+    ("Loading states:", { registrationsLoading, classesLoading, teachersLoading });
   }, [fetchRegistrations, fetchClasses, fetchTeachers]);
 
   const loading = registrationsLoading || classesLoading || teachersLoading;
-  console.log("Combined loading state:", loading);
+  ("Combined loading state:", loading);
 
   if (loading) {
     return (

@@ -37,9 +37,8 @@ export function AdminLogin() {
   const pathname = usePathname();
   // Handle redirect only once when admin becomes available
   useEffect(() => {
-    console.log('AdminLogin useEffect:', { admin, loading, pathname, isRedirecting });
     if (admin && !loading && pathname === '/admin/login' && !isRedirecting) {
-      console.log('AdminLogin: Already logged in, redirecting to /admin');
+      ('AdminLogin: Already logged in, redirecting to /admin');
       setIsRedirecting(true);
       router.push('/admin');
     }
@@ -47,9 +46,8 @@ export function AdminLogin() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      console.log('Attempting login with:', data.email);
       await login(data.email, data.password);
-      console.log('Login successful');
+      ('Login successful');
       // Don't manually redirect here - let the useEffect handle it
     } catch (err) {
       console.error('Login failed:', err);

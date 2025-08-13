@@ -56,7 +56,7 @@ export function RegistrationsManagement() {
       status: statusFilter === 'all' ? '' : statusFilter,
       classId: classFilter === 'all' ? '' : classFilter,
     });
-    console.log('Fetched registrations:', registrations); // Debug log
+    ('Fetched registrations:', registrations); // Debug log
   }, [currentPage, searchTerm, statusFilter, classFilter, fetchRegistrations]);
 
   const handleStatusUpdate = async (studentId: string, status: string) => {

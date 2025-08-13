@@ -20,7 +20,7 @@ import type {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'
 
-console.log(API_BASE_URL);
+(API_BASE_URL);
 
 class ApiClient {
   private client: AxiosInstance;
@@ -105,7 +105,7 @@ class ApiClient {
     let attempt = 0;
     while (attempt < maxRetries) {
       try {
-        console.log(`getProfile: Attempt ${attempt + 1}`);
+        (`getProfile: Attempt ${attempt + 1}`);
         return await this.client.get('/auth/profile');
       } catch (error) {
         attempt++;
