@@ -112,12 +112,13 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       const result = await submitRegistration(cleanedData);
       onSuccess(result);
     } catch (error: any) {
-      const apiMessage = error?.response?.data?.message;
-  
-      if (apiMessage?.toLowerCase().includes("already registered")) {
+      console.log("Full Error Object:", error); // Add this line
+      const apiMessage = error?.message || error?.response?.data?.error || "Something went wrong during registration.";
+      console.log("Extracted API Message:", apiMessage); // Add this line
+      if (apiMessage.toLowerCase().includes("already registered")) {
         reportError?.("This child is already registered by you.");
       } else {
-        reportError?.("Something went wrong during registration. Please try again.");
+        reportError?.(apiMessage);
       }
     }
   };
