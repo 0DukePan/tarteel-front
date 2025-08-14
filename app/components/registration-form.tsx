@@ -112,17 +112,18 @@ export function RegistrationForm({ onSuccess }: RegistrationFormProps) {
       const result = await submitRegistration(cleanedData);
       onSuccess(result);
     } catch (error: any) {
-      console.log("Full Error Object:", error); // Add this line
-      const apiMessage = error?.message || error?.response?.data?.error || "Something went wrong during registration.";
-      console.log("Extracted API Message:", apiMessage); // Add this line
+      console.log("Full Error Object:", error);
+      console.log("Error Response Data:", error.response?.data);
+      console.log("Error Message:", error.message);
+      const apiMessage = error?.response?.data?.error || error.message || "Something went wrong during registration.";
+      console.log("Extracted API Message:", apiMessage);
       if (apiMessage.toLowerCase().includes("already registered")) {
-        reportError?.("This child is already registered by you.");
+        reportError?.("This child is already registered by you");
       } else {
         reportError?.(apiMessage);
       }
     }
   };
-  
   
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
