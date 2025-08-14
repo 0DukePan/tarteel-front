@@ -7,14 +7,12 @@ export async function middleware(request: NextRequest) {
 
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     if (!token) {
-      ("Middleware: No token, redirecting to /admin/login");
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
     // Rely on backend /auth/profile to validate token
   }
 
   if (token && pathname === "/admin/login") {
-    ("Middleware: Token found, redirecting to /admin");
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 
