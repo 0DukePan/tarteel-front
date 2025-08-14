@@ -66,7 +66,6 @@ export function TeachersManagement() {
       reset();
       fetchTeachers();
     } catch (error) {
-      ('failed to save teacher', error);
     }
   };
 

@@ -24,11 +24,9 @@ export function AdminDashboard() {
     fetchRegistrations({ page: 1, limit: 100 });
     fetchClasses();
     fetchTeachers();
-    ("Loading states:", { registrationsLoading, classesLoading, teachersLoading });
   }, [fetchRegistrations, fetchClasses, fetchTeachers]);
 
   const loading = registrationsLoading || classesLoading || teachersLoading;
-  ("Combined loading state:", loading);
 
   if (loading) {
     return (

@@ -20,7 +20,6 @@ import type {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'
 
-(API_BASE_URL);
 
 class ApiClient {
   private client: AxiosInstance;
