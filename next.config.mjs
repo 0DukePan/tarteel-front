@@ -10,10 +10,6 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-  // Remove the deprecated appDir option
-  experimental: {
-    // appDir: true, // This is deprecated in Next.js 14
-  },
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
       config.optimization.splitChunks.chunks = 'all';
@@ -55,7 +51,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable build trace collection entirely to prevent stack overflow
   experimental: {
     outputFileTracingRoot: process.cwd(),
     outputFileTracingExcludes: {
@@ -68,10 +63,8 @@ const nextConfig = {
         'temp/**/*',
       ],
     },
-    // Disable other experimental features that might cause issues
-    optimizePackageImports: false,
+    // remove optimizePackageImports since false is invalid
   },
-  // Alternative: completely disable tracing
   outputFileTracing: false,
 };
 
