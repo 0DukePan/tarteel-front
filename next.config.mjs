@@ -38,15 +38,18 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api/:path*',
-      },
-    ];
+    if (process.env.NEXT_PUBLIC_API_URL) {
+      return [
+        {
+          source: '/api/:path*',
+          destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+        },
+      ];
+    }
+    return [];
   },
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
