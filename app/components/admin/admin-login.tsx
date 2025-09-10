@@ -37,10 +37,11 @@ export function AdminLogin() {
   const pathname = usePathname();
   // Handle redirect only once when admin becomes available
   useEffect(() => {
-    if (admin && !loading && pathname === '/admin/login' && !isRedirecting) {
+    if (admin && !loading && !isRedirecting) {
       setIsRedirecting(true);
-      router.push('/admin');
+      router.replace('/admin/dashboard'); 
     }
+    
   }, [admin, loading, pathname, isRedirecting, router]);
 
   const onSubmit = async (data: LoginFormData) => {
