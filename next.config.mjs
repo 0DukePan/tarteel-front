@@ -41,31 +41,12 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api'}`
+        destination: process.env.NEXT_PUBLIC_API_URL || 'https://tarteel-back.onrender.com/api/:path*',
       },
     ];
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  experimental: {
-    outputFileTracingRoot: process.cwd(),
-    outputFileTracingExcludes: {
-      '*': [
-        'node_modules/**/*',
-        '.next/**/*',
-        '.git/**/*',
-        'coverage/**/*',
-        'tmp/**/*',
-        'temp/**/*',
-      ],
-    },
-    // remove optimizePackageImports since false is invalid
-  },
-  outputFileTracing: false,
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
 };
 
 export default nextConfig;
