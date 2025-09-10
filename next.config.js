@@ -2,23 +2,25 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-
+  
+  // Enable webpack build worker for better performance
   experimental: {
     webpackBuildWorker: true,
   },
-
+  
   images: {
     domains: ['localhost'],
     formats: ['image/webp', 'image/avif'],
     unoptimized: true,
   },
-
+  
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-
+  
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
+      // Optimize chunk splitting for production
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -34,16 +36,17 @@ const nextConfig = {
         },
       };
     }
-
+    
+    // Reduce bundle size by excluding unnecessary modules
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
       path: false,
     };
-
+    
     return config;
   },
-
+  
   async headers() {
     return [
       {
@@ -56,36 +59,38 @@ const nextConfig = {
       },
     ];
   },
-
+  
   async redirects() {
     return [
       {
-        source: '/admin/dashboard',
-        destination: '/admin',
+        source: "/admin",
+        destination: "/admin/dashboard",
         permanent: true,
       },
     ];
   },
-
+  
   async rewrites() {
-    let apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    if (apiUrl) {
-      // Ensure no duplicate `/api`
-      apiUrl = apiUrl.replace(/\/+$/, ''); // remove trailing slashes
+    if (process.env.NEXT_PUBLIC_API_URL) {
       return [
         {
           source: '/api/:path*',
-          destination: `${apiUrl}/:path*`,
+          destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
         },
       ];
     }
     return [];
   },
-
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-
+  
+  // Build optimizations
+  eslint: { 
+    ignoreDuringBuilds: true 
+  },
+  typescript: { 
+    ignoreBuildErrors: true 
+  },
+  
+  // DISABLE output file tracing to prevent micromatch stack overflow
   outputFileTracing: false,
   trailingSlash: false,
 };
