@@ -1,13 +1,3 @@
 node_modules
-.vscode
-.idea
-.DS_Store
-Thumbs.db
-.env
+.next
 .env.local
-.env.development
-.env.production
-.env.test
-.next/cache
-coverage
-dist

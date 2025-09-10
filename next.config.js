@@ -90,8 +90,8 @@ const nextConfig = {
     ignoreBuildErrors: true 
   },
   
-  // Reduce build trace complexity
-  outputFileTracing: true,
+  // DISABLE output file tracing to prevent micromatch stack overflow
+  outputFileTracing: false,
   trailingSlash: false,
 };
 
