@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
-import { Menu, Home, Users, BookOpen, UserCheck, LogOut, Bell } from "lucide-react";
+import { Menu, Users, BookOpen, UserCheck, LogOut, Bell, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { useAuthStore } from "../../../lib/store/auth-store";
 import { LoadingSpinner } from "../../components/ui/loading-spinner";
@@ -63,7 +63,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   const navigation = [
-    { name: "Dashboard", href: "/admin", icon: Home, color: "emerald" },
+    { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, color: "emerald" },
     { name: "Registrations", href: "/admin/registrations", icon: UserCheck, color: "blue" },
     { name: "Classes", href: "/admin/classes", icon: BookOpen, color: "purple" },
     { name: "Teachers", href: "/admin/teachers", icon: Users, color: "orange" },
