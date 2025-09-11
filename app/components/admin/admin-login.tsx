@@ -39,10 +39,10 @@ export function AdminLogin() {
   useEffect(() => {
     if (admin && !loading && !isRedirecting) {
       setIsRedirecting(true);
-      router.replace('/admin/dashboard'); 
+      router.replace("/admin/dashboard");
     }
-    
-  }, [admin, loading, pathname, isRedirecting, router]);
+  }, [admin, loading, isRedirecting, router]);
+  
 
   const onSubmit = async (data: LoginFormData) => {
     try {

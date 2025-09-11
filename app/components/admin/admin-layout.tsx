@@ -41,7 +41,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       router.push("/admin/login");
     }
   }, [admin, loading, pathname, router, isInitialized]);
-
+  
   const handleLogout = () => {
     logout();
     router.push("/admin/login");

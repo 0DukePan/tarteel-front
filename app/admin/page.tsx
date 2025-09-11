@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function AdminPage() {
   const token = await getAuthTokenServer();
   if (!token) {
-    redirect('/admin/login');
+    redirect('/admin/login'); 
   }
-  return <AdminDashboard/>;
+  return <AdminDashboard/>; 
 }
