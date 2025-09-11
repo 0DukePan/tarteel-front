@@ -38,6 +38,7 @@ export function AdminLogin() {
   // Handle redirect only once when admin becomes available
   useEffect(() => {
     if (admin && !loading && !isRedirecting) {
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
       setIsRedirecting(true);
       router.replace("/admin/dashboard");
     }
