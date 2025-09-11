@@ -2,16 +2,17 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getAuthToken } from "@/lib/auth";
 
-export default function AdminPage() {
+export default function AdminIndexPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
+    const token = getAuthToken();
     if (!token) {
-      router.replace("/admin/login");
+      router.replace("/admin/login"); 
     } else {
-      router.replace("/admin/dashboard");
+      router.replace("/admin/dashboard"); 
     }
   }, [router]);
 
