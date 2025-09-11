@@ -1,20 +1,19 @@
-import { getAuthTokenServer } from "@/lib/auth-server";
-import { AdminDashboard } from "../components/admin/admin-dashboard";
-import { redirect } from "next/navigation";
+"use client";
 
-export default async function AdminPage() {
-  try {
-    console.log("🔎 API_URL:", process.env.API_URL);
-    console.log("🔎 NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-    const token = await getAuthTokenServer();
+export default function AdminPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth_token");
     if (!token) {
-      return redirect("/admin/login");
+      router.replace("/admin/login");
+    } else {
+      router.replace("/admin/dashboard");
     }
+  }, [router]);
 
-    return <AdminDashboard />;
-  } catch (err) {
-    console.error("❌ Error in /admin page:", err);
-    return redirect("/admin/login");
-  }
+  return null;
 }
