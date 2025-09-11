@@ -8,7 +8,7 @@ export default async function AdminPage() {
 
   const token = await getAuthTokenServer();
   if (!token) {
-    redirect('/admin/login'); 
+    return redirect('/admin/login'); 
   }
   return <AdminDashboard/>; 
 }
